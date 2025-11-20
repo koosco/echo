@@ -19,4 +19,6 @@ kubectl
 kubectl apply -f echo-server
 kubectl get pods
 kubectl logs echo-server
+kubectl port-forward pod/echo-pod 8080:8080
+kubectl exec -it echo-pod -- bash
 ```
