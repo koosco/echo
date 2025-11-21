@@ -17,8 +17,12 @@ spec:
     spec:
       containers:
         - name: echo-container
-          image: echo-server:v2
+          image: echo-server:3.0
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
+          env:
+            # spring에서 대문자 -> 소문자, _ -> . 로 매핑
+            - name: GREETING_MESSAGE
+              value: message from deployment.yaml
       restartPolicy: Always
