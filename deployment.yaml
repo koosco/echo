@@ -24,5 +24,8 @@ spec:
           env:
             # spring에서 대문자 -> 소문자, _ -> . 로 매핑
             - name: GREETING_MESSAGE
-              value: message from deployment.yaml
+              valueFrom:
+                configMapKeyRef:
+                  name: echo-config
+                  key: GREETING_MESSAGE
       restartPolicy: Always
