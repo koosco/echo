@@ -13,8 +13,8 @@ pods:
 replicasets:
 	kubectl get replicasets
 
-service:
-	kubectl get service
+svc:
+	kubectl get svc
 
 delete-all:
 	kubectl delete all --all
