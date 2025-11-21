@@ -1,11 +1,18 @@
-.PHONY: build build-image pods replicasets service delete-all apply delete %
+.PHONY: nodes node-exec build build-image pods replicasets svc delete-all apply delete %
+
+nodes:
+	k3d node list
+
+# crictl images 확인
+node-exec:
+	docker exec -it k3d-mycluster-server-0 sh 
 
 build:
 	./gradlew clean build
 
 build-image:
-	docker build -t echo-server:v2 .
-	k3d image import echo-server:v2 -c mycluster
+	docker build -t echo-server:3.0 .
+	k3d image import echo-server:3.0 -c mycluster
 
 pods:
 	kubectl get pods
@@ -19,11 +26,12 @@ svc:
 delete-all:
 	kubectl delete all --all
 
+delete:
+	kubectl delete -f $(filter-out $@,$(MAKECMDGOALS))
+
 apply:
 	kubectl apply -f $(filter-out $@,$(MAKECMDGOALS))
 
-delete:
-	kubectl delete -f $(filter-out $@,$(MAKECMDGOALS))
 
 %:
 	@:
