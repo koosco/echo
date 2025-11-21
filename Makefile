@@ -1,4 +1,7 @@
-.PHONY: nodes node-exec build build-image pods replica svc config secret delete-all apply delete %
+.PHONY: re nodes node-exec build build-image pods replica svc config secret delete-all apply delete %
+
+re:
+	kubectl api-resources
 
 nodes:
 	k3d node list
@@ -13,6 +16,9 @@ build:
 build-image:
 	docker build -t echo-server:3.0 .
 	k3d image import echo-server:3.0 -c mycluster
+
+get:
+	kubectl get $(filter-out $@,$(MAKECMDGOALS))
 
 pods:
 	kubectl get pods
