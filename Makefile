@@ -1,4 +1,4 @@
-.PHONY: nodes node-exec build build-image pods replicasets svc delete-all apply delete %
+.PHONY: nodes node-exec build build-image pods replica svc config secret delete-all apply delete %
 
 nodes:
 	k3d node list
@@ -17,11 +17,17 @@ build-image:
 pods:
 	kubectl get pods
 
-replicasets:
+replica:
 	kubectl get replicasets
 
 svc:
 	kubectl get svc
+
+config:
+	kubectl get configmaps
+
+secret:
+	kubectl get secrets
 
 delete-all:
 	kubectl delete all --all

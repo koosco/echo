@@ -28,4 +28,9 @@ spec:
                 configMapKeyRef:
                   name: echo-config
                   key: GREETING_MESSAGE
+            - name: GREETING_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: echo-secret
+                  key: GREETING_SECRET
       restartPolicy: Always
