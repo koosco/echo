@@ -1,4 +1,4 @@
-.PHONY: build build-image pods delete-all apply delete %
+.PHONY: build build-image pods replicasets service delete-all apply delete %
 
 build:
 	./gradlew clean build
@@ -9,6 +9,12 @@ build-image:
 
 pods:
 	kubectl get pods
+
+replicasets:
+	kubectl get replicasets
+
+service:
+	kubectl get service
 
 delete-all:
 	kubectl delete all --all
